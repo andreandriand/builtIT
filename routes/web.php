@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TokoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/admin', function () {
+    return view('admin.index', ['title' => 'Dashboard']);
+});
+
+Route::get('/admin/dataProduk', [TokoController::class, 'index'])->name('Dashboard');

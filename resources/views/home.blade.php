@@ -1,51 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main')
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Landing Page</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-</head>
+@section('content')
 
-<body>
-  <!-- Navbar -->
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-pink">
-    <div class="container">
-      <a class="navbar-brand" href="index.php">BuildIT</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ms-auto">
-          <?php
-
-          if (isset($_SESSION['username'])) {
-            $id = $_SESSION['username'];
-            echo '<a class="nav-item nav-link" href="history.php?id=' . $id . '" >History</a>';
-            echo '<a class="nav-item nav-link" href="logout.php">Logout</a>';
-          } else {
-            echo '<button type="button" class="nav-link btn" data-bs-toggle="modal" data-bs-target="#login">
-                    Login
-                  </button>';
-            echo '<button type="button" class="nav-link btn" data-bs-toggle="modal" data-bs-target="#register">
-                  Register
-                </button>';
-          }
-
-          ?>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- End Navbar -->
-
-  <!-- Jumbotron -->
+<!-- Jumbotron -->
 
   <section id="jumbotron" class="jumbotron text-center pt-5 bg-purple">
     <div class="container">
@@ -62,86 +19,40 @@
 
   <!-- CRUD -->
 
-  <section id="crud" class="text-center text-light bg-purple2">
+  <section id="crud" class="text-light bg-purple2">
     <div class="container">
-      <div class="row">
+      <div class="row text-center">
         <div class="col">
           <h2>Let's Build Your Future Palace</h2>
         </div>
       </div>
-      <form method="POST" action="">
-        <div class="row mt-5">
-          <div class="col">
-            <p class="mt-5">Choose Your Material</p>
-            <table cellpadding="10">
-              <tr>
-                <td>
-                  <label for="semen">Semen </label>
-                </td>
-                <td> : </td>
-                <td>
-                  <input id="semen" type="number" name="semen" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="bata">Batu Bata </label>
-                </td>
-                <td> : </td>
-                <td>
-                  <input id="bata" type="number" name="bata" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="kayu">Kayu </label>
-                </td>
-                <td> : </td>
-                <td>
-                  <input id="kayu" type="number" name="kayu" />
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="col">
-            <p class="mt-5">Choose Your Tools</p>
-            <table class="ms-3" cellpadding="10">
-              <tr>
-                <td>
-                  <label for="palu">Palu </label>
-                </td>
-                <td> : </td>
-                <td>
-                  <input id="palu" type="number" name="palu" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="sekop">Sekop </label>
-                </td>
-                <td> : </td>
-                <td>
-                  <input id="sekop" type="number" name="sekop" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="obeng">Obeng </label>
-                </td>
-                <td> : </td>
-                <td>
-                  <input id="obeng" type="number" name="obeng" />
-                </td>
-              </tr>
-            </table>
-          </div>
+      <div class="row mt-5 text-center justify-content-center">
+        <div class="col-md-3">
+          <p class="mb-4">Pesan Alat dan Bahan Disini</p>
+          <form>
+            <div class="mb-3">
+              <label for="nama" class="form-label">Nama Anda :</label>
+              <input type="text" class="form-control" id="nama" aria-describedby="namaPelanggan">
+            </div>
+            <div class="mb-3">
+              <label for="produk" class="form-label">Barang :</label>
+              <select class="form-select form-select-sm" aria-label="Form Pemesanan">
+                <option selected>Pilih barang yang ingin dipesan</option>
+                <option value="1">Semen</option>
+                <option value="2">Batu Bata</option>
+                <option value="3">Kayu</option>
+                <option value="4">Palu</option>
+                <option value="5">Sekop</option>
+                <option value="6">Bor Listrik</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="qty">Qty :</label>
+              <input type="number" class="form-control" id="qty">
+            </div>
+            <button type="submit" class="btn btn-primary mt-5 mb-5">Pesan</button>
+          </form>
         </div>
-        <div class="row mt-5 pb-5">
-          <div class="col">
-            <button type="submit" name="submit" class="btn btn-success">Order</button>
-          </div>
-        </div>
-      </form>
     </div>
   </section>
 
@@ -219,8 +130,5 @@
 
   <!-- End Footer -->
 
+@endsection
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-
-</html>
