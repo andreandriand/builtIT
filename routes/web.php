@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\TokoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TokoController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PesananController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,6 @@ Route::get('/admin', function () {
     return view('admin.index', ['title' => 'Dashboard']);
 });
 
-Route::get('/admin/dataProduk', [TokoController::class, 'index'])->name('Dashboard');
+Route::get('/admin/dataProduk', [TokoController::class, 'index'])->name('Data Produk');
+Route::get('/admin/dataPesanan', [PesananController::class, 'index'])->name('Data Pesanan');
+Route::get('/admin/dataUser', [UserController::class, 'index'])->name('Data User');
