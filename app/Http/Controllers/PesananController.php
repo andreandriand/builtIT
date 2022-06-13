@@ -19,6 +19,12 @@ class PesananController extends Controller
         return view('admin.pesanan.index', ['title' => 'Data Pesanan', 'pesanan' => $pesanan]);
     }
 
+    public function index2()
+    {
+        $pesanan = Pesanan::all();
+        return view('kasir.index', ['title' => 'Halaman Kasir', 'pesanan' => $pesanan]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

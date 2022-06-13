@@ -27,3 +27,5 @@ Route::get('/admin', function () {
 Route::get('/admin/dataProduk', [TokoController::class, 'index'])->name('Data Produk');
 Route::get('/admin/dataPesanan', [PesananController::class, 'index'])->name('Data Pesanan');
 Route::get('/admin/dataUser', [UserController::class, 'index'])->name('Data User');
+
+Route::get('/kasir', [PesananController::class, 'index2'])->name('Data Pesanan');
