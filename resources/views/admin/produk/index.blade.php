@@ -7,7 +7,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Data Produk</div>
-
                 <div class="card-body">
                     <a href="/admin/produk/create" class="btn btn-primary">Tambah Produk</a>
                     <br><br>

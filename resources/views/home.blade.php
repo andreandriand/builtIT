@@ -2,6 +2,21 @@
 
 @section('content')
 
+<section class="bg-purple">
+@if(session()->has('success'))
+  <div class="container">
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+  </div>
+@endif
+</section>
+
 <!-- Jumbotron -->
 
   <section id="jumbotron" class="jumbotron text-center pt-5 bg-purple">
@@ -29,26 +44,39 @@
       <div class="row mt-5 text-center justify-content-center">
         <div class="col-md-3">
           <p class="mb-4">Pesan Alat dan Bahan Disini</p>
-          <form>
+          <form action="/" method="POST">
+            @csrf
             <div class="mb-3">
               <label for="nama" class="form-label">Nama Anda :</label>
-              <input type="text" class="form-control" id="nama" aria-describedby="namaPelanggan">
+              <input type="text" name="nama_customer" class="form-control @error('nama_customer') is-invalid @enderror" id="nama_customer" aria-describedby="namaPelanggan">
+              @error('nama_customer')
+                <div class="invalid-feedback">
+                        {{ $message }}
+                </div>
+              @enderror
             </div>
             <div class="mb-3">
               <label for="produk" class="form-label">Barang :</label>
-              <select class="form-select form-select-sm" aria-label="Form Pemesanan">
+              <select name="id_produk" class="form-select form-select-sm @error('id_produk') is-invalid @enderror" aria-label="Form Pemesanan">
                 <option selected>Pilih barang yang ingin dipesan</option>
-                <option value="1">Semen</option>
-                <option value="2">Batu Bata</option>
-                <option value="3">Kayu</option>
-                <option value="4">Palu</option>
-                <option value="5">Sekop</option>
-                <option value="6">Bor Listrik</option>
+                @foreach($produk as $p)
+                <option value="{{$p->id}}">{{$p->nama_produk}}</option>
+                @endforeach
               </select>
+              @error('id_produk')
+                <div class="invalid-feedback">
+                        {{ $message }}
+                </div>
+              @enderror
             </div>
             <div class="mb-3">
               <label class="form-label" for="qty">Qty :</label>
-              <input type="number" class="form-control" id="qty">
+              <input type="number" class="form-control @error('jumlah_pesan') is-invalid @enderror" name="jumlah_pesan" id="qty">
+              @error('jumlah_pesan')
+                <div class="invalid-feedback">
+                        {{ $message }}
+                </div>
+              @enderror
             </div>
             <button type="submit" class="btn btn-primary mt-5 mb-5">Pesan</button>
           </form>

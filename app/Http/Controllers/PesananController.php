@@ -42,7 +42,14 @@ class PesananController extends Controller
      */
     public function store(StorePesananRequest $request)
     {
-        //
+        $pesanan = $request->validate([
+            'nama_customer' => 'required|string|min:3|max:255',
+            'id_produk' => 'required|integer',
+            'jumlah_pesan' => 'required|integer',
+        ]);
+
+        Pesanan::create($pesanan);
+        return redirect()->route('home')->with('success', 'Pesanan berhasil dibuat');
     }
 
     /**

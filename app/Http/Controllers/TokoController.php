@@ -19,6 +19,12 @@ class TokoController extends Controller
         return view('admin.produk.index', ['produk' => $produk, 'title' => 'Data Produk']);
     }
 
+    public function index2()
+    {
+        $produk = Toko::all();
+        return view('home', ['produk' => $produk, 'title' => 'Landing Page']);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

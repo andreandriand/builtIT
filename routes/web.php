@@ -16,9 +16,9 @@ use App\Http\Controllers\PesananController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [TokoController::class, 'index2'])->name('home');
+Route::post('/', [PesananController::class, 'store'])->name('tokostore');
+
 
 Route::get('/admin', function () {
     return view('admin.index', ['title' => 'Dashboard']);
