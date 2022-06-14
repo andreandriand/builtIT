@@ -24,7 +24,12 @@ Route::get('/admin', function () {
     return view('admin.index', ['title' => 'Dashboard']);
 });
 
-Route::get('/admin/dataProduk', [TokoController::class, 'index'])->name('Data Produk');
+Route::get('/admin/dataProduk', [TokoController::class, 'index'])->name('admin.produk.index');
+Route::get('/admin/dataProduk/tambah', [TokoController::class, 'create'])->name('Tambah Produk');
+Route::post('/admin/dataProduk/tambah', [TokoController::class, 'store']);
+Route::get('/admin/dataProduk/edit/{toko:id}', [TokoController::class, 'edit'])->name('admin.produk.edit');
+Route::put('/admin/dataProduk/edit/{toko:id}', [TokoController::class, 'update']);
+Route::delete('/admin/dataProduk/delete/{toko:id}', [TokoController::class, 'destroy'])->name('admin.produk.destroy');
 Route::get('/admin/dataPesanan', [PesananController::class, 'index'])->name('Data Pesanan');
 Route::get('/admin/dataUser', [UserController::class, 'index'])->name('Data User');
 

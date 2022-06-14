@@ -32,7 +32,7 @@ class TokoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.produk.insert', ['title' => 'Tambah Produk']);
     }
 
     /**
@@ -43,7 +43,17 @@ class TokoController extends Controller
      */
     public function store(StoreTokoRequest $request)
     {
-        //
+        $produk = $request->validate(
+            [
+                'nama_produk' => 'required|max:255',
+                'kategori' => 'required',
+                'stok' => 'required|string|max:255',
+                'harga' => 'required',
+            ]
+        );
+
+        Toko::create($produk);
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -65,7 +75,7 @@ class TokoController extends Controller
      */
     public function edit(Toko $toko)
     {
-        //
+        return view('admin.produk.edit', ['produk' => $toko, 'title' => 'Edit Produk']);
     }
 
     /**
@@ -77,7 +87,17 @@ class TokoController extends Controller
      */
     public function update(UpdateTokoRequest $request, Toko $toko)
     {
-        //
+        $produk = $request->validate(
+            [
+                'nama_produk' => 'required|max:255',
+                'kategori' => 'required',
+                'stok' => 'required',
+                'harga' => 'required',
+            ]
+        );
+
+        $toko->update($produk);
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil diubah');
     }
 
     /**
@@ -88,6 +108,7 @@ class TokoController extends Controller
      */
     public function destroy(Toko $toko)
     {
-        //
+        Toko::destroy($toko->id);
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil dihapus');
     }
 }
