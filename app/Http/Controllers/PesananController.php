@@ -71,7 +71,7 @@ class PesananController extends Controller
      */
     public function edit(Pesanan $pesanan)
     {
-        //
+        return view('admin.pesanan.edit', ['title' => 'Edit Pesanan', 'pesanan' => $pesanan]);
     }
 
     /**
@@ -83,7 +83,17 @@ class PesananController extends Controller
      */
     public function update(UpdatePesananRequest $request, Pesanan $pesanan)
     {
-        //
+        $rules = [
+            'nama_customer' => 'required|string|min:3|max:255',
+            'id_produk' => 'required|integer',
+            'jumlah_pesan' => 'required|integer',
+            'status' => 'required|string|min:3|max:255',
+        ];
+
+        $rules['nama_kasir'] = $request->status === 'Sudah Diproses' ? 'required|string|min:3|max:255' : 'nullable';
+
+        $pesanan->update($request->validate($rules));
+        return redirect()->route('admin.pesanan.index')->with('success', 'Data pesanan berhasil diubah');
     }
 
     /**
@@ -94,6 +104,7 @@ class PesananController extends Controller
      */
     public function destroy(Pesanan $pesanan)
     {
-        //
+        $pesanan->destroy($pesanan->id);
+        return redirect()->route('admin.pesanan.index')->with('success', 'Data pesanan berhasil dihapus');
     }
 }

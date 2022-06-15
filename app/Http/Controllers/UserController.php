@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.insert', ['title' => 'Tambah User']);
     }
 
     /**
@@ -37,7 +37,19 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+
+        $user = $request->validate(
+            [
+                'nama' => 'required|min:3|max:255',
+                'email' => 'required|email|max:255|unique:users',
+                'password' => 'required|min:5|max:255',
+                'role' => 'required|max:255',
+            ]
+        );
+        $user['password'] = bcrypt($user['password']);
+
+        User::create($user);
+        return redirect()->route('admin.user.index')->with('success', 'Data User berhasil ditambahkan');
     }
 
     /**
@@ -59,7 +71,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.user.edit', ['user' => $user, 'title' => 'Edit User']);
     }
 
     /**
@@ -71,7 +83,20 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $rules = [
+            'nama' => 'required|min:3|max:255',
+            'password' => 'required|min:5|max:255',
+            'role' => 'required|max:255',
+        ];
+
+        if ($request->email != $user->email) {
+            $rules['email'] = 'required|email|max:255|unique:users';
+        }
+
+        $request['password'] = bcrypt($request['password']);
+
+        $user->update($request->validate($rules));
+        return redirect()->route('admin.user.index')->with('success', 'Data User berhasil diubah');
     }
 
     /**
@@ -82,6 +107,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->destroy($user->id);
+        return redirect()->route('admin.user.index')->with('success', 'Data User berhasil dihapus');
     }
 }

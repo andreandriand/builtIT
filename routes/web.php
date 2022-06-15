@@ -30,7 +30,15 @@ Route::post('/admin/dataProduk/tambah', [TokoController::class, 'store']);
 Route::get('/admin/dataProduk/edit/{toko:id}', [TokoController::class, 'edit'])->name('admin.produk.edit');
 Route::put('/admin/dataProduk/edit/{toko:id}', [TokoController::class, 'update']);
 Route::delete('/admin/dataProduk/delete/{toko:id}', [TokoController::class, 'destroy'])->name('admin.produk.destroy');
-Route::get('/admin/dataPesanan', [PesananController::class, 'index'])->name('Data Pesanan');
-Route::get('/admin/dataUser', [UserController::class, 'index'])->name('Data User');
+Route::get('/admin/dataPesanan', [PesananController::class, 'index'])->name('admin.pesanan.index');
+Route::get('/admin/dataPesanan/edit/{pesanan:id}', [PesananController::class, 'edit'])->name('admin.pesanan.edit');
+Route::put('/admin/dataPesanan/edit/{pesanan:id}', [PesananController::class, 'update']);
+Route::delete('/admin/dataPesanan/delete/{pesanan:id}', [PesananController::class, 'destroy'])->name('admin.pesanan.destroy');
+Route::get('/admin/dataUser', [UserController::class, 'index'])->name('admin.user.index');
+Route::get('/admin/dataUser/tambah', [UserController::class, 'create'])->name('admin.user.create');
+Route::post('/admin/dataUser/tambah', [UserController::class, 'store']);
+Route::get('/admin/dataUser/edit/{user:id}', [UserController::class, 'edit'])->name('admin.user.edit');
+Route::put('/admin/dataUser/edit/{user:id}', [UserController::class, 'update']);
+Route::delete('/admin/dataUser/delete/{user:id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
 
 Route::get('/kasir', [PesananController::class, 'index2'])->name('Data Pesanan');
