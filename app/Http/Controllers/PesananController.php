@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Pesanan;
 use App\Http\Requests\StorePesananRequest;
 use App\Http\Requests\UpdatePesananRequest;
@@ -71,7 +72,11 @@ class PesananController extends Controller
      */
     public function edit(Pesanan $pesanan)
     {
-        return view('admin.pesanan.edit', ['title' => 'Edit Pesanan', 'pesanan' => $pesanan]);
+        return view('admin.pesanan.edit', ['title' => 'Edit Pesanan', 'pesanan' => $pesanan, 'user' => User::select('nama')->where('role', 'Kasir')->get()]);
+    }
+    public function edit2(Pesanan $pesanan)
+    {
+        return view('kasir.edit', ['title' => 'Edit Pesanan', 'pesanan' => $pesanan, 'user' => User::select('nama')->where('role', 'Kasir')->get()]);
     }
 
     /**
@@ -94,6 +99,21 @@ class PesananController extends Controller
 
         $pesanan->update($request->validate($rules));
         return redirect()->route('admin.pesanan.index')->with('success', 'Data pesanan berhasil diubah');
+    }
+
+    public function update2(UpdatePesananRequest $request, Pesanan $pesanan)
+    {
+        $rules = [
+            'nama_customer' => 'required|string|min:3|max:255',
+            'id_produk' => 'required|integer',
+            'jumlah_pesan' => 'required|integer',
+            'status' => 'required|string|min:3|max:255',
+        ];
+
+        $rules['nama_kasir'] = $request->status === 'Sudah Diproses' ? 'required|string|min:3|max:255' : 'nullable';
+
+        $pesanan->update($request->validate($rules));
+        return redirect()->route('kasir.index')->with('success', 'Pesanan berhasil diterima');
     }
 
     /**

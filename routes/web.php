@@ -41,4 +41,6 @@ Route::get('/admin/dataUser/edit/{user:id}', [UserController::class, 'edit'])->n
 Route::put('/admin/dataUser/edit/{user:id}', [UserController::class, 'update']);
 Route::delete('/admin/dataUser/delete/{user:id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
 
-Route::get('/kasir', [PesananController::class, 'index2'])->name('Data Pesanan');
+Route::get('/kasir', [PesananController::class, 'index2'])->name('kasir.index');
+Route::get('/kasir/accept/{pesanan:id}', [PesananController::class, 'edit2'])->name('kasir.accept');
+Route::put('/kasir/accept/{pesanan:id}', [PesananController::class, 'update2']);

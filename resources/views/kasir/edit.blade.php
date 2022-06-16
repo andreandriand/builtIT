@@ -1,15 +1,15 @@
-@extends('layouts.admin')
+@extends('layouts.kasir')
 
 @section('content')
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="fw-bold">Edit Data Pesanan</h2>
+                <h2 class="fw-bold">Terima Pesanan</h2>
             </div>
         </div>
         <div class="row mt-5">
             <div class="col">
-                <form action="/admin/dataPesanan/edit/{{ $pesanan->id }}" method="POST">
+                <form action="/kasir/accept/{{ $pesanan->id }}" method="POST">
                     @method('PUT')
                     @csrf
                     <div class="form-group mb-2">
@@ -88,7 +88,7 @@
                             </div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Edit Pesanan</button>
+                    <button type="submit" class="btn btn-primary">Terima Pesanan</button>
                 </form>
             </div>
         </div>
