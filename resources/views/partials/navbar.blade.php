@@ -7,8 +7,31 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/login">Login</a>
-                <a class="nav-link" href="/register">Daftar</a>
+                @auth
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <strong>Hi, {{ Auth::user()->nama }}</strong>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Riwayat</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form action="/logout" method="POST">
+                                        @csrf
+                                        <button class="dropdown-item" type="submit" name="logout">Keluar</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                @else
+                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/register">Daftar</a>
+                @endauth
             </div>
         </div>
     </div>

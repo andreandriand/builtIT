@@ -47,8 +47,9 @@ Route::get('/kasir', [PesananController::class, 'index2'])->name('kasir.index');
 Route::get('/kasir/accept/{pesanan:id}', [PesananController::class, 'edit2'])->name('kasir.accept');
 Route::put('/kasir/accept/{pesanan:id}', [PesananController::class, 'update2']);
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+Route::get('/register', [RegisterController::class, 'index'])->name('register.index')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::get('/login', [LoginController::class, 'index'])->name('login.index')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
