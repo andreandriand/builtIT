@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +46,9 @@ Route::delete('/admin/dataUser/delete/{user:id}', [UserController::class, 'destr
 Route::get('/kasir', [PesananController::class, 'index2'])->name('kasir.index');
 Route::get('/kasir/accept/{pesanan:id}', [PesananController::class, 'edit2'])->name('kasir.accept');
 Route::put('/kasir/accept/{pesanan:id}', [PesananController::class, 'update2']);
+
+Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::post('/login', [LoginController::class, 'authenticate']);
