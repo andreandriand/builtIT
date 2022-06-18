@@ -31,7 +31,9 @@
                             </div>
                         @enderror
                     </div>
-
+                    <div>
+                        Belum punya akun? Daftar <a href="/register">disini</a>
+                    </div>
                     @if (session()->has('errorLogin'))
                         <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
                             {{ session('errorLogin') }}

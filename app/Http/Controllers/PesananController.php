@@ -127,4 +127,10 @@ class PesananController extends Controller
         $pesanan->destroy($pesanan->id);
         return redirect()->route('admin.pesanan.index')->with('success', 'Data pesanan berhasil dihapus');
     }
+
+    public function destroy2(Pesanan $pesanan)
+    {
+        $pesanan->destroy($pesanan->id);
+        return redirect()->route('kasir.index')->with('success', 'Data pesanan berhasil dihapus');
+    }
 }

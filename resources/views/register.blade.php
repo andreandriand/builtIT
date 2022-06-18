@@ -41,6 +41,9 @@
                             </div>
                         @enderror
                     </div>
+                    <div>
+                        Sudah punya akun? Login <a href="/login">disini</a>
+                    </div>
                     <button type="submit" name="register" class="btn btn-primary mt-4">Daftar</button>
                 </form>
             </div>
