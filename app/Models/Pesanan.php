@@ -11,7 +11,7 @@ class Pesanan extends Model
 
     protected $fillable = [
         'nama_customer',
-        'id_produk',
+        'nama_produk',
         'jumlah_pesan',
         'status',
         'nama_kasir'

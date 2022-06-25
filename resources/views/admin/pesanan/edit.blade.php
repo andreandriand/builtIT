@@ -34,12 +34,21 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group mb-2">
-                        <label for="id_produk">ID Produk :</label>
-                        <input type="number" class="form-control @error('id_produk') is-invalid @enderror" id="id_produk"
-                            name="id_produk" placeholder="ID Produk" value="{{ old('id_produk', $pesanan->id_produk) }}"
-                            required>
-                        @error('id_produk')
+                    <div class="mb-2">
+                        <label for="produk" class="form-label">Barang :</label>
+                        <select name="nama_produk"
+                            class="form-select form-select-sm @error('nama_produk') is-invalid @enderror"
+                            aria-label="Form Pemesanan" id="produk" required>
+                            <option selected value="{{ old('nama_produk', $pesanan->nama_produk) }}">
+                                {{ $pesanan->nama_produk }}
+                            </option>
+                            @foreach ($produk as $p)
+                                @if ($p->nama_produk !== $pesanan->nama_produk)
+                                    <option value="{{ $p->nama_produk }}">{{ $p->nama_produk }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        @error('nama_produk')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

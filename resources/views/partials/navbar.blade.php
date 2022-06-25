@@ -15,7 +15,11 @@
                                 <strong>Hi, {{ Auth::user()->nama }}</strong>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Riwayat</a></li>
+                                @if ($title === 'Riwayat Pesanan')
+                                    <li><a class="dropdown-item" href="/">Beranda</a></li>
+                                @else
+                                    <li><a class="dropdown-item" href="/riwayat/{{ Auth::user()->nama }}">Riwayat</a></li>
+                                @endif
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

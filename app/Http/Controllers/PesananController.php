@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Toko;
 use App\Models\Pesanan;
 use App\Http\Requests\StorePesananRequest;
 use App\Http\Requests\UpdatePesananRequest;
@@ -26,6 +27,12 @@ class PesananController extends Controller
         return view('kasir.index', ['title' => 'Halaman Kasir', 'pesanan' => $pesanan]);
     }
 
+    public function history($nama)
+    {
+        $pesanan = Pesanan::where('nama_customer', 'like', "%$nama%")->get();
+        return view('history', ['title' => 'Riwayat Pesanan', 'pesanan' => $pesanan]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -45,7 +52,7 @@ class PesananController extends Controller
     {
         $pesanan = $request->validate([
             'nama_customer' => 'required|string|min:3|max:255',
-            'id_produk' => 'required|integer',
+            'nama_produk' => 'required|string|min:3|max:20',
             'jumlah_pesan' => 'required|integer',
         ]);
 
@@ -72,11 +79,13 @@ class PesananController extends Controller
      */
     public function edit(Pesanan $pesanan)
     {
-        return view('admin.pesanan.edit', ['title' => 'Edit Pesanan', 'pesanan' => $pesanan, 'user' => User::select('nama')->where('role', 'Kasir')->get()]);
+        $produk = Toko::all();
+        return view('admin.pesanan.edit', ['title' => 'Edit Pesanan', 'produk' => $produk, 'pesanan' => $pesanan, 'user' => User::select('nama')->where('role', 'Kasir')->get()]);
     }
     public function edit2(Pesanan $pesanan)
     {
-        return view('kasir.edit', ['title' => 'Edit Pesanan', 'pesanan' => $pesanan, 'user' => User::select('nama')->where('role', 'Kasir')->get()]);
+        $produk = Toko::all();
+        return view('kasir.edit', ['title' => 'Edit Pesanan', 'produk' => $produk, 'pesanan' => $pesanan, 'user' => User::select('nama')->where('role', 'Kasir')->get()]);
     }
 
     /**
@@ -90,7 +99,7 @@ class PesananController extends Controller
     {
         $rules = [
             'nama_customer' => 'required|string|min:3|max:255',
-            'id_produk' => 'required|integer',
+            'nama_produk' => 'required|string',
             'jumlah_pesan' => 'required|integer',
             'status' => 'required|string|min:3|max:255',
         ];
@@ -105,7 +114,7 @@ class PesananController extends Controller
     {
         $rules = [
             'nama_customer' => 'required|string|min:3|max:255',
-            'id_produk' => 'required|integer',
+            'nama_produk' => 'required|string',
             'jumlah_pesan' => 'required|integer',
             'status' => 'required|string|min:3|max:255',
         ];

@@ -26,7 +26,7 @@
                                     <th>No</th>
                                     <th>Nama Pelanggan</th>
                                     <th>Tanggal Pemesanan</th>
-                                    <th>ID Barang</th>
+                                    <th>Nama Barang</th>
                                     <th>Jumlah Pesanan</th>
                                     <th>Status</th>
                                     <th>Nama Kasir</th>
@@ -39,7 +39,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $p->nama_customer }}</td>
                                         <td>{{ $p->tanggal_pesan }}</td>
-                                        <td>{{ $p->id_produk }}</td>
+                                        <td>{{ $p->nama_produk }}</td>
                                         <td>{{ $p->jumlah_pesan }}</td>
                                         <td>{{ $p->status }}</td>
                                         <td>{{ $p->nama_kasir }}</td>

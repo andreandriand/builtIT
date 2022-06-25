@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_customer', 255);
             $table->timestamp('tanggal_pesan');
-            $table->integer('id_produk');
+            $table->string('nama_produk');
             $table->integer('jumlah_pesan');
             $table->string('status', 255)->default('Belum Diproses');
             $table->string('nama_kasir', 255)->nullable();

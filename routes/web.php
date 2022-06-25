@@ -54,3 +54,5 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/riwayat/{pesanan:nama_customer}', [PesananController::class, 'history'])->name('riwayat')->middleware('auth');
