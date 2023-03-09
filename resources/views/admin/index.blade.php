@@ -39,6 +39,7 @@
         <div class="row mt-5">
             <div class="col">
                 <form class="mt-3" action="/logout" method="POST">
+
                     @csrf
                     <button class="btn btn-danger" type="submit" name="logout">Keluar</button>
                 </form>
